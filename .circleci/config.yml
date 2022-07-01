@@ -17,15 +17,20 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Docker
+          command: |
+            sudo chown circleci:circleci -R /usr/local
+
+            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
+              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+              rm -rf "node-v18.4.0-linux-x64.tar.gz"
+      - run:
           name: Bundler
           command: bundle install
       - run:
           name: NPM
-          command: |
-            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
-              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
-              rm -rf "node-v18.4.0-linux-x64.tar.gz"
-            npm install
+          command: npm install
+
       # - ruby/bundle-install
 
 # Invoke jobs via workflows
