@@ -7,13 +7,16 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.4.0
 
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/ruby:3.1.2
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    docker:
-      - image: cimg/ruby:3.1.2
-    executor: ruby/default
+    executor: docker-executor
     steps:
       - checkout
       - run:
@@ -44,12 +47,27 @@ jobs:
           paths:
             - node_modules
           key: node_modules-{{ checksum "package-lock.json" }}
-      # - ruby/bundle-install
+  review:
+    executor: docker-executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Rubocop
+          command: rubocop
+      - run:
+          name: Bundle Audit
+          command: bundle-audit
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  ci: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
+      - review
