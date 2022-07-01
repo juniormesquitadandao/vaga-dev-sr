@@ -31,7 +31,6 @@ jobs:
           keys:
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
-
       - run:
           name: Bundle
           command: bundle install
@@ -39,7 +38,6 @@ jobs:
           paths:
             - ~/.rubygems
           key: rubygems-{{ checksum "Gemfile.lock" }}
-
       - run:
           name: NPM
           command: npm install
@@ -55,13 +53,25 @@ jobs:
           keys:
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
-
       - run:
           name: Rubocop
           command: rubocop
       - run:
           name: Bundle Audit
           command: bundle-audit
+  test:
+    executor: docker-executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Rspec
+          command: rspec
+      - store_artifacts:
+          path: coverage
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -73,3 +83,6 @@ workflows:
       - review:
           requires:
             - build
+      - test:
+          requires:
+            - review
