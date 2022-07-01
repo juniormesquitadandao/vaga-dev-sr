@@ -38,9 +38,11 @@ RUN wget -nv "https://nodejs.org/dist/v${ARG_NODE_VERSION}/node-v${ARG_NODE_VERS
   tar -xf "node-v${ARG_NODE_VERSION}-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
   rm -rf "node-v${ARG_NODE_VERSION}-linux-x64.tar.gz"
 
-RUN sudo apt install -y libpq-dev
+RUN sudo apt install -y libpq-dev && \
+  curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 
 RUN locale && \
   ruby -v && \
   echo "node: `node -v`" && \
-  echo "npm: `npm -v`"
+  echo "npm: `npm -v`" && \
+  circleci version

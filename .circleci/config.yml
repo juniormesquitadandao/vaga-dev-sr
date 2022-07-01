@@ -35,8 +35,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.rubygems
-          keys:
-            - rubygems-{{ checksum "Gemfile.lock" }}
+          key: rubygems-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: NPM
@@ -44,8 +43,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          keys:
-            - node_modules-{{ checksum "package-lock.json" }}
+          key: node_modules-{{ checksum "package-lock.json" }}
       # - ruby/bundle-install
 
 # Invoke jobs via workflows
