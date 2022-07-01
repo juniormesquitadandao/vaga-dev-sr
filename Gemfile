@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -57,6 +55,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers', '5.1.0'
   gem 'simplecov', '0.21.2'
 end
 
