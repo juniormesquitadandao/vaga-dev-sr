@@ -47,7 +47,6 @@ gem 'bootsnap', '1.12.0', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'bundle-audit', '0.1.0', require: false
   gem 'byebug', '11.1.3'
   gem 'factory_bot_rails', '6.2.0'
   gem 'rspec-rails', '5.1.2'
@@ -70,6 +69,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'bundle-audit', '0.1.0', require: false
+  gem 'html2slim', '0.2.0', require: false
 end
 
 gem 'redis', '4.7.0'
+gem 'slim-rails', '3.5.1'
