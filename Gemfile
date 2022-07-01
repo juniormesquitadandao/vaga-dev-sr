@@ -47,12 +47,12 @@ gem 'bootsnap', '1.12.0', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'bundle-audit', '0.1.0'
   gem 'byebug', '11.1.3'
   gem 'rspec-rails', '5.1.2'
   gem 'rubocop', '1.31.1'
   gem 'rubocop-rails', '2.15.1'
   gem 'rubocop-rspec', '2.11.1'
-  gem 'bundle-audit', '0.1.0'
 end
 
 group :test do
@@ -72,4 +72,3 @@ group :development do
 end
 
 gem 'redis', '4.7.0'
-
