@@ -21,7 +21,11 @@ jobs:
           command: bundle install
       - run:
           name: NPM
-          command: npm install
+          command: |
+            wget -nv "https://nodejs.org/dist/v${ARG_NODE_VERSION}/node-v${ARG_NODE_VERSION}-linux-x64.tar.gz" && \
+              tar -xf "node-v${ARG_NODE_VERSION}-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+              rm -rf "node-v${ARG_NODE_VERSION}-linux-x64.tar.gz"
+            npm install
       # - ruby/bundle-install
 
 # Invoke jobs via workflows
