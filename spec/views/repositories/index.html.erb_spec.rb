@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'repositories/index', type: :view do
   before do
-    assign(:repositories, [create(:repository, name: 'Name 1', external_id: '1'), create(:repository, name: 'Name 2', external_id: '2')])
+    assign(:repositories,
+           [create(:repository, name: 'Name 1', external_id: '1'),
+            create(:repository, name: 'Name 2', external_id: '2')])
   end
 
   it 'renders a list of repositories' do

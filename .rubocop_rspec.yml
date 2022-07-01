@@ -5,3 +5,6 @@ RSpec/NamedSubject:
 
 RSpec/InstanceVariable:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
