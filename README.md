@@ -1,4 +1,4 @@
-# Github
+# GithubJMD
 
 ![Architecture](https://raw.githubusercontent.com/juniormesquitadandao/vaga-dev-sr/master/architecture/dbdiagram.png)
 
