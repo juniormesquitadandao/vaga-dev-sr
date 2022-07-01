@@ -29,3 +29,5 @@
 
 /config/credentials/*.key
 /coverage
+.env.docker-compose
+.byebug_history

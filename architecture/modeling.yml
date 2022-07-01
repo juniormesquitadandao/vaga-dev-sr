@@ -3,7 +3,7 @@ repository:
   name: string, required
   full_name: string, required
   description: string
-  metadata: jsonb, required, default({})
   external_id: string, required, unique
+  metadata: jsonb, required, default({})
   created_at: timestamp, required
   updated_at: timestamp, required
