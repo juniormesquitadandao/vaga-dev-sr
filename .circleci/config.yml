@@ -11,6 +11,13 @@ executors:
   docker-executor:
     docker:
       - image: cimg/ruby:3.1.2
+        environment:
+          DATABASE_URL: postgres://user:password@postgresql:5432
+          REDIS_URL: redis://:@redis:6379
+      - image: postgres:14.1
+        environment:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -67,6 +74,9 @@ jobs:
           keys:
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Rails
+          command: RAILS_ENV=test rails db:create
       - run:
           name: Rspec
           command: rspec
