@@ -1,7 +1,25 @@
-| <div id="
-= dom_id repository
-| "> 
-p
-  strong
-    | Name:
-  = repository.name
+div id="= dom_id repository"
+  p
+    strong ID:
+    = repository.id
+  p
+    strong Name:
+    = repository.name
+  p
+    strong Full Name:
+    = repository.full_name
+  p
+    strong Description:
+    = repository.description
+  p
+    strong External ID:
+    = repository.external_id
+  p
+    strong Metadata:
+    = repository.metadata
+  p
+    strong Created at:
+    = repository.created_at
+  p
+    strong Updated at:
+    = repository.updated_at

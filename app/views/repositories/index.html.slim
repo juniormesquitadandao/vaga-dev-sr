@@ -1,9 +1,23 @@
-p[style="color: green"]
+p style="color: green"
   = notice
-h1
-  | Repositories
-#repositories
-  - @repositories&.each do |repository|
-    = render repository
-    p
-      = link_to "Show this repository", repository
+h1 Repositories
+
+table#repositories
+  thead
+    tr
+      th ID
+      th Name
+      th Extenal ID
+      th Created at
+      th Updated at
+      th
+  tbody
+    - @repositories&.each do |repository|
+      tr
+        td = repository.id
+        td = repository.name
+        td = repository.external_id
+        td = repository.created_at
+        td = repository.updated_at
+        td = link_to "Show this repository", repository
+
