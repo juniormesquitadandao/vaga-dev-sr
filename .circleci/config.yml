@@ -24,13 +24,28 @@ jobs:
             wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
               tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
               rm -rf "node-v18.4.0-linux-x64.tar.gz"
+      - restore_cache:
+          keys:
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
+
       - run:
-          name: Bundler
+          name: Bundle
           command: bundle install
+      - save_cache:
+          paths:
+            - ~/.rubygems
+          keys:
+            - rubygems-{{ checksum "Gemfile.lock" }}
+
       - run:
           name: NPM
           command: npm install
-
+      - save_cache:
+          paths:
+            - node_modules
+          keys:
+            - node_modules-{{ checksum "package-lock.json" }}
       # - ruby/bundle-install
 
 # Invoke jobs via workflows
