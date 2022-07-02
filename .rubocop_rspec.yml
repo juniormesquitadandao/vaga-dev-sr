@@ -8,3 +8,9 @@ RSpec/InstanceVariable:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false

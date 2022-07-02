@@ -19,10 +19,10 @@ gem 'puma', '5.6.4'
 gem 'importmap-rails', '1.1.2'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '1.1.1'
+# gem 'turbo-rails', '1.1.1'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '1.0.4'
+# gem 'stimulus-rails', '1.0.4'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder', '2.11.5'
@@ -73,5 +73,7 @@ group :development do
   gem 'html2slim', '0.2.0', require: false
 end
 
+gem 'babel-transpiler', '0.7.0'
 gem 'redis', '4.7.0'
+gem 'responders', '3.0.1'
 gem 'slim-rails', '3.5.1'

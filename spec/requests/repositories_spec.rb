@@ -1,60 +1,64 @@
 require 'rails_helper'
 
 RSpec.describe '/repositories', type: :request do
-  let(:valid_attributes) do
-    attributes_for(:repository)
-  end
-
-  let(:invalid_attributes) do
-    Repository.new.attributes
-  end
-
   describe 'GET /index' do
-    it 'renders a successful response' do
-      create(:repository)
+    context 'renders a successful response' do
+      it 'html' do
+        get repositories_url
 
-      get repositories_url
+        expect(response).to be_successful
+      end
 
-      expect(response).to be_successful
+      it 'json' do
+        get repositories_url(sort: 'id', order: 'asc', offset: 0, limit: 100, name: 'Name', format: :json)
+
+        expect(response).to be_successful
+      end
+    end
+
+    context 'renders a unsuccessful response' do
+      it 'csv' do
+        get repositories_url(format: :csv)
+
+        expect(response).to be_not_found
+      end
+
+      it 'json' do
+        get repositories_url(format: :json)
+
+        expect(response).to be_unprocessable
+      end
     end
   end
 
   describe 'GET /show' do
-    it 'renders a successful response' do
-      repository = create(:repository)
+    context 'renders a successful response' do
+      let(:repository) { create(:repository) }
 
-      get repository_url(repository)
+      it 'html' do
+        get repository_url(id: repository.id)
 
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'POST /create' do
-    context 'with valid parameters' do
-      it 'creates a new Repository' do
-        expect do
-          post repositories_url, params: { repository: valid_attributes }
-        end.to change(Repository, :count).by(1)
+        expect(response).to be_successful
       end
 
-      it 'redirects to the created repository' do
-        post repositories_url, params: { repository: valid_attributes }
+      it 'json' do
+        get repository_url(id: repository.id, format: :json)
 
-        expect(response).to redirect_to(repository_url(Repository.last))
+        expect(response).to be_successful
       end
     end
 
-    context 'with invalid parameters' do
-      it 'does not create a new Repository' do
-        expect do
-          post repositories_url, params: { repository: invalid_attributes }
-        end.to change(Repository, :count).by(0)
+    context 'renders a unsuccessful response' do
+      it 'html' do
+        get repository_url(id: 0)
+
+        expect(response).to be_not_found
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post repositories_url, params: { repository: invalid_attributes }
+      it 'json' do
+        get repository_url(id: 0, format: :json)
 
-        expect(response).to be_unprocessable
+        expect(response).to be_not_found
       end
     end
   end
