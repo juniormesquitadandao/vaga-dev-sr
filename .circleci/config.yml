@@ -22,68 +22,49 @@ jobs:
     executor: docker-executor
     steps:
       - checkout
-      - run:
-          name: Chown
-          command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}-v1
-            - rubygems-{{ checksum "Gemfile.lock" }}-v1
-            - node_modules-{{ checksum "package-lock.json" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
       - run:
-          name: Docker
+          name: Node
           command: |
-            if ! which node &> /dev/null; then
-              wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
-                tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
-                rm -rf "node-v18.4.0-linux-x64.tar.gz"
+            sudo chown circleci:circleci -R /usr/local
 
-              sudo chown circleci:circleci -R /usr/local
-            fi
-      - save_cache:
-          paths:
-            - /usr/local/bin/corepack
-            - /usr/local/bin/node
-            - /usr/local/bin/npm
-            - /usr/local/bin/npx
-            - /usr/local/include/node
-            - /usr/local/lib/node_modules
-            - /usr/local/share/doc/node
-            - /usr/local/share/man/man1/node.1
-            - /usr/local/share/systemtap/tapset/node.stp
-          key: node-{{ checksum ".node-version" }}-v1
+            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
+              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+              rm -rf "node-v18.4.0-linux-x64.tar.gz"
       - run:
           name: Bundle
-          command: |
-            bundle install
-            rubocop --version
-            bundle-audit --version
-            rails --version
-            rspec --version
+          command: bundle install
       - save_cache:
           paths:
             - ~/.rubygems
-          key: rubygems-{{ checksum "Gemfile.lock" }}-v1
+          key: rubygems-{{ checksum "Gemfile.lock" }}
       - run:
           name: NPM
           command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: node_modules-{{ checksum "package-lock.json" }}-v1
+          key: node_modules-{{ checksum "package-lock.json" }}
   review:
     working_directory: ~/vaga-dev-sr
     executor: docker-executor
     steps:
       - checkout
-      - run:
-          name: Chown
-          command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}-v1
-            - rubygems-{{ checksum "Gemfile.lock" }}-v1
-            - node_modules-{{ checksum "package-lock.json" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Node
+          command: |
+            sudo chown circleci:circleci -R /usr/local
+
+            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
+              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+              rm -rf "node-v18.4.0-linux-x64.tar.gz"
       - run:
           name: Rubocop
           command: rubocop
@@ -95,14 +76,18 @@ jobs:
     executor: docker-executor
     steps:
       - checkout
-      - run:
-          name: Chown
-          command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}-v1
-            - rubygems-{{ checksum "Gemfile.lock" }}-v1
-            - node_modules-{{ checksum "package-lock.json" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
+      - run:
+          name: Node
+          command: |
+            sudo chown circleci:circleci -R /usr/local
+
+            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
+              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+              rm -rf "node-v18.4.0-linux-x64.tar.gz"
       - run:
           name: Rails
           command: RAILS_ENV=test rails db:create
