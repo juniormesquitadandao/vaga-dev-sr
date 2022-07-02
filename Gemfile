@@ -74,6 +74,7 @@ group :development do
 end
 
 gem 'babel-transpiler', '0.7.0'
+gem 'execjs', '2.8.1'
 gem 'redis', '4.7.0'
 gem 'responders', '3.0.1'
 gem 'slim-rails', '3.5.1'
