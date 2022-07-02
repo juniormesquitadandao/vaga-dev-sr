@@ -41,3 +41,5 @@
             button :disabled="!filter.isPrevious()" @click="filter.previous(controller, '#{repositories_path}')" Previous
             button :disabled="!filter.isNext()" @click="filter.next(controller, '#{repositories_path}')" Next
             button :disabled="!filter.isNext()" @click="filter.last(controller, '#{repositories_path}')" Last
+
+  button @click="controller.create('#{repositories_path}')" Create from GitHub API

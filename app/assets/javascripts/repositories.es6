@@ -17,6 +17,14 @@ class Repository {
       method: 'GET'
     });
   }
+
+  create(path) {
+    return axios({
+      url: path,
+      method: 'POST',
+      data: {}
+    });
+  }
 }
 
 class RepositoriesFilter extends ApplicationFilter {
@@ -45,6 +53,14 @@ class RepositoriesController {
       path.replace(':id', new Url().paths().find(p => /\d/.test(p)))
     ).then(success => {
       this.repository = new Repository(success.data.repository);
+    });
+  }
+
+  create(path) {
+    this.repository.create(path).then((success) => {
+      alert(success.data._messages.success);
+    }, (fail) => {
+      this.repository.errors = fail.data.errors;
     });
   }
 }

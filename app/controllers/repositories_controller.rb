@@ -14,6 +14,10 @@ class RepositoriesController < ApplicationController
 
   def show; end
 
+  def create
+    RepositoriesJob.perform_later
+  end
+
   private
 
   def filter_params
