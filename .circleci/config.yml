@@ -48,9 +48,9 @@ jobs:
             - /usr/local/bin/npx
             - /usr/local/include/node
             - /usr/local/lib/node_modules
-            - /usr/local/share/doc
-            - /usr/local/share/man
-            - /usr/local/share/systemtap
+            - /usr/local/share/doc/node
+            - /usr/local/share/man/man1/node.1
+            - /usr/local/share/systemtap/tapset/node.stp
           key: node-{{ checksum ".node-version" }}
       - run:
           name: Bundle
@@ -81,10 +81,10 @@ jobs:
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Rubocop
-          command: bundle exec rubocop
+          command: rubocop
       - run:
           name: Bundle Audit
-          command: bundle exec bundle-audit
+          command: bundle-audit
   test:
     working_directory: ~/vaga-dev-sr
     executor: docker-executor
