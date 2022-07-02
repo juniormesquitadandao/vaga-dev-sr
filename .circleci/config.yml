@@ -54,7 +54,12 @@ jobs:
           key: node-{{ checksum ".node-version" }}-v1
       - run:
           name: Bundle
-          command: bundle install
+          command: |
+            bundle install
+            rubocop --version
+            bundle-audit --version
+            rails --version
+            rspec --version
       - save_cache:
           paths:
             - ~/.rubygems
