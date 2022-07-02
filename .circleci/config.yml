@@ -27,9 +27,9 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}
-            - rubygems-{{ checksum "Gemfile.lock" }}
-            - node_modules-{{ checksum "package-lock.json" }}
+            - node-{{ checksum ".node-version" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}-v1
+            - node_modules-{{ checksum "package-lock.json" }}-v1
       - run:
           name: Docker
           command: |
@@ -51,21 +51,21 @@ jobs:
             - /usr/local/share/doc/node
             - /usr/local/share/man/man1/node.1
             - /usr/local/share/systemtap/tapset/node.stp
-          key: node-{{ checksum ".node-version" }}
+          key: node-{{ checksum ".node-version" }}-v1
       - run:
           name: Bundle
           command: bundle install
       - save_cache:
           paths:
             - ~/.rubygems
-          key: rubygems-{{ checksum "Gemfile.lock" }}
+          key: rubygems-{{ checksum "Gemfile.lock" }}-v1
       - run:
           name: NPM
           command: npm install
       - save_cache:
           paths:
             - node_modules
-          key: node_modules-{{ checksum "package-lock.json" }}
+          key: node_modules-{{ checksum "package-lock.json" }}-v1
   review:
     working_directory: ~/vaga-dev-sr
     executor: docker-executor
@@ -76,9 +76,9 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}
-            - rubygems-{{ checksum "Gemfile.lock" }}
-            - node_modules-{{ checksum "package-lock.json" }}
+            - node-{{ checksum ".node-version" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}-v1
+            - node_modules-{{ checksum "package-lock.json" }}-v1
       - run:
           name: Rubocop
           command: rubocop
@@ -95,9 +95,9 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}
-            - rubygems-{{ checksum "Gemfile.lock" }}
-            - node_modules-{{ checksum "package-lock.json" }}
+            - node-{{ checksum ".node-version" }}-v1
+            - rubygems-{{ checksum "Gemfile.lock" }}-v1
+            - node_modules-{{ checksum "package-lock.json" }}-v1
       - run:
           name: Rails
           command: RAILS_ENV=test rails db:create
