@@ -24,6 +24,7 @@
 cd github
   echo 'GITHUB_PERSONAL_ACCESS_TOKEN=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN' > .env.docker-compose
   chmod +x devops/**/*.sh
+  ./devops/github/repositories.sh
   ./devops/compose/config.sh
   ./devops/compose/build.sh
   ./devops/compose/up.sh
@@ -36,7 +37,7 @@ cd github
     rubocop -a
     bundle-audit
     circleci config validate
-    ./devops/github/repositories.sh
+
 
     date > .keep
     git status
