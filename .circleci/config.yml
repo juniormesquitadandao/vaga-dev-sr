@@ -22,6 +22,9 @@ jobs:
     executor: docker-executor
     steps:
       - checkout
+      - run:
+          name: Chown
+          command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
             - usr-local-{{ checksum ".node-version" }}
@@ -31,8 +34,6 @@ jobs:
           name: Docker
           command: |
             if ! which node &> /dev/null; then
-              sudo chown circleci:circleci -R /usr/local
-
               wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
                 tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
                 rm -rf "node-v18.4.0-linux-x64.tar.gz"
