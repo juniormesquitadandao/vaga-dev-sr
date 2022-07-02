@@ -37,7 +37,7 @@ jobs:
       - save_cache:
           paths:
             - ~/vaga-dev-sr/node-v18.4.0-linux-x64.tar.gz
-          key: node-{{ checksum ".node-version" }}
+          key: node-{{ checksum ".node-version" }}-1656755003
       - run:
           name: Bundle
           command: bundle install
@@ -59,7 +59,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}
+            - node-{{ checksum ".node-version" }}-1656755003
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
@@ -86,7 +86,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-{{ checksum ".node-version" }}
+            - node-{{ checksum ".node-version" }}-1656755003
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
