@@ -22,18 +22,25 @@ jobs:
     executor: docker-executor
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - usr-local-{{ checksum ".node-version" }}
+            - rubygems-{{ checksum "Gemfile.lock" }}
+            - node_modules-{{ checksum "package-lock.json" }}
       - run:
           name: Docker
           command: |
-            sudo chown circleci:circleci -R /usr/local
+            if ! which node &> /dev/null; then
+              sudo chown circleci:circleci -R /usr/local
 
-            wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
-              tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
-              rm -rf "node-v18.4.0-linux-x64.tar.gz"
-      - restore_cache:
-          keys:
-            - rubygems-{{ checksum "Gemfile.lock" }}
-            - node_modules-{{ checksum "package-lock.json" }}
+              wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
+                tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
+                rm -rf "node-v18.4.0-linux-x64.tar.gz"
+            fi
+      - save_cache:
+          paths:
+            - /usr/local
+          key: usr-local-{{ checksum ".node-version" }}
       - run:
           name: Bundle
           command: bundle install
@@ -55,6 +62,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - usr-local-{{ checksum ".node-version" }}
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
@@ -73,6 +81,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - usr-local-{{ checksum ".node-version" }}
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
