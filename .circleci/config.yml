@@ -27,7 +27,7 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - usr-local-{{ checksum ".node-version" }}
+            - node-{{ checksum ".node-version" }}
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
@@ -42,8 +42,16 @@ jobs:
             fi
       - save_cache:
           paths:
-            - /usr/local
-          key: usr-local-{{ checksum ".node-version" }}
+            - /usr/local/bin/corepack
+            - /usr/local/bin/node
+            - /usr/local/bin/npm
+            - /usr/local/bin/npx
+            - /usr/local/include/node
+            - /usr/local/lib/node_modules
+            - /usr/local/share/doc
+            - /usr/local/share/man
+            - /usr/local/share/systemtap
+          key: node-{{ checksum ".node-version" }}
       - run:
           name: Bundle
           command: bundle install
@@ -68,7 +76,7 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - usr-local-{{ checksum ".node-version" }}
+            - node-{{ checksum ".node-version" }}
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
@@ -87,7 +95,7 @@ jobs:
           command: sudo chown circleci:circleci -R /usr/local
       - restore_cache:
           keys:
-            - usr-local-{{ checksum ".node-version" }}
+            - node-{{ checksum ".node-version" }}
             - rubygems-{{ checksum "Gemfile.lock" }}
             - node_modules-{{ checksum "package-lock.json" }}
       - run:
