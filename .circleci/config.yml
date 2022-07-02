@@ -34,11 +34,9 @@ jobs:
             wget -nv "https://nodejs.org/dist/v18.4.0/node-v18.4.0-linux-x64.tar.gz" && \
               tar -xf "node-v18.4.0-linux-x64.tar.gz" --directory '/usr/local' --strip-components '1' && \
               rm -rf "node-v18.4.0-linux-x64.tar.gz"
-
-            echo $PWD
       - save_cache:
           paths:
-            - node-v18.4.0-linux-x64.tar.gz
+            - ~/vaga-dev-sr/node-v18.4.0-linux-x64.tar.gz
           key: node-{{ checksum ".node-version" }}
       - run:
           name: Bundle
