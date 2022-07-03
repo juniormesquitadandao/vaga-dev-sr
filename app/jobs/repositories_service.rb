@@ -1,12 +1,9 @@
 class RepositoriesService
   include ActiveModel::Model
 
-  def call
-
-  end
+  def call; end
 
   private
 
-  def languages
-  end
+  def languages; end
 end

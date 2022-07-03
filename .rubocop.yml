@@ -49,3 +49,6 @@ Style/MultilineBlockChain:
 
 Layout/LineLength:
   Enabled: false
+
+Lint/EmptyFile:
+  Enabled: false
