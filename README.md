@@ -6,7 +6,7 @@
 
 - RDS
   - DB: Postgresql
-  - Version: 14.1-R1
+  - Version: 14.2-R1
   - Instance: db.t3.micro
   - Free Tier? Yes
 - ElastiCash
