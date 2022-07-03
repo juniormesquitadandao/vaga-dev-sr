@@ -4,14 +4,21 @@
   p v-text="filter.errors" v-if="filter.errors.base"
 
   form novalidate="" @submit.prevent="controller.index('#{repositories_path}')"
-    label for="name" Name:
-    input#name type="text" name="name" v-model="filter.params.name"
-    button Search
+    p
+      label for="language" = "#{i18n_attribute Repository, :language}: "
+      input#language type="text" name="language" v-model="filter.params.language"
+    p
+      label for="name" = "#{i18n_attribute Repository, :name}: "
+      input#name type="text" name="name" v-model="filter.params.name"
+    p
+      button type="button" @click="controller.clear('#{repositories_path}')" Clear
+      button type="submit" Search
 
   table
     thead
       tr
         th = i18n_attribute Repository, :id
+        th = i18n_attribute Repository, :language
         th = i18n_attribute Repository, :name
         th = i18n_attribute Repository, :external_id
         th = i18n_attribute Repository, :created_at
@@ -21,6 +28,8 @@
       tr v-for="repository in filter.results" :key="repository.id"
         td
           span v-text="repository.id"
+        td
+          span v-text="repository.language"
         td
           span v-text="repository.name"
         td

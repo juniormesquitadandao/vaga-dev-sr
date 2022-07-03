@@ -1,7 +1,7 @@
 class RepositoriesJob < ApplicationJob
   queue_as :default
 
-  def perform
-    RepositoriesService.new.call
+  def perform(language)
+    RepositoriesService.new(language:).call
   end
 end

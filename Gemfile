@@ -77,3 +77,7 @@ gem 'babel-transpiler', '0.7.0'
 gem 'redis', '4.7.0'
 gem 'responders', '3.0.1'
 gem 'slim-rails', '3.5.1'
+
+gem 'enum_help', '0.0.19'
+
+gem 'faraday', '2.3.0'

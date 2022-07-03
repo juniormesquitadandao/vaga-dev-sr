@@ -40,7 +40,7 @@ class RepositoriesFilter extends ApplicationFilter {
 class RepositoriesController {
   constructor() {
     this.controller = this;
-    this.filter = new RepositoriesFilter({sort: 'id', order: 'asc'});
+    this.filter = new RepositoriesFilter({sort: 'id', order: 'desc'});
     this.repository = new Repository();
   }
 
@@ -58,10 +58,17 @@ class RepositoriesController {
 
   create(path) {
     this.repository.create(path).then((success) => {
-      alert(success.data._messages.success);
+      setTimeout(()=>{
+        this.index(path);
+      }, 1000);
     }, (fail) => {
       this.repository.errors = fail.data.errors;
     });
+  }
+
+  clear(path) {
+    this.filter.clear();
+    this.index(path);
   }
 }
 
