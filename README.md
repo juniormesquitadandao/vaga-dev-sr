@@ -1,6 +1,6 @@
 # GitJMD
 
-![Modeling](https://raw.githubusercontent.com/juniormesquitadandao/vaga-dev-sr/cd/architecture/modeling.png)
+![Modeling](https://raw.githubusercontent.com/juniormesquitadandao/vaga-dev-sr/master/architecture/modeling.png)
 
 ## AWS Resoucers
 
