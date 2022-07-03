@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_authenticity_token
-    cookies[:_github_jmd_authenticity_token] = { value: form_authenticity_token, http_only: true }
+    cookies[:_git_jmd_authenticity_token] = { value: form_authenticity_token, http_only: true }
   end
 
   # /usr/local/bundle/gems/actionpack-7.0.3/lib/action_controller/metal/request_forgery_protection.rb:306
   def request_authenticity_tokens
-    super << cookies[:_github_jmd_authenticity_token]
+    super << cookies[:_git_jmd_authenticity_token]
   end
 end
