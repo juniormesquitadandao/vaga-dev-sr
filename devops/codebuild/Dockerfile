@@ -17,9 +17,7 @@ RUN bundle install && \
 
 RUN rails assets:precompile && \
   mv .aws ~/.aws && \
-  cd public/assets && \
-  aws s3 sync . s3://juniormesquitadandao/assets/vaga-dev-sr && \
-  cd ../../ && \
+  aws s3 sync public s3://juniormesquitadandao/vaga-dev-sr/public && \
   rails assets:clobber && \
   rm -rf node_modules && \
   rm -rf ~/.aws
