@@ -2,4 +2,4 @@
 
 set -e
 
-docker-compose build -q
+docker build . -t vaga-dev-sr_app -q
