@@ -29,14 +29,14 @@ RSpec.describe RepositoriesService, type: :service do
 
   describe '#call!' do
     it 'must successful' do
-      expect(subject).to receive(:request) { instance_double(Faraday::Response, status: 200, body: body_200) }
       expect(subject).to receive(:successful).with(body_200).and_call_original
 
       expect(subject.send(:call!)).to be_truthy
     end
 
     it 'must unsuccessful' do
-      expect(subject).to receive(:request) { instance_double(Faraday::Response, status: 422, body: body_422) }
+      subject.language = nil
+
       expect(subject).to receive(:unsuccessful).with(body_422).and_call_original
 
       expect(subject.send(:call!)).to be_falsey

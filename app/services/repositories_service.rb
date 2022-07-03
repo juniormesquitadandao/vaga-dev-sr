@@ -26,8 +26,8 @@ class RepositoriesService
   def request
     Faraday.get url do |request|
       request.headers.merge!(
-        Accept: 'application/vnd.github.v3+json',
-        Authorization: "token #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}"
+        accept: 'application/vnd.github.v3+json',
+        authorization: "token #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}"
       )
       request.params = params
     end

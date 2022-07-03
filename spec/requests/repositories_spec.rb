@@ -60,7 +60,7 @@ RSpec.describe '/repositories', type: :request do
   describe 'POST /create' do
     context 'renders a successful response' do
       it 'json' do
-        get repositories_url
+        post repositories_url(format: :json)
 
         expect(response).to be_successful
       end
@@ -68,7 +68,7 @@ RSpec.describe '/repositories', type: :request do
 
     context 'renders a unsuccessful response' do
       it 'html' do
-        get repositories_url
+        post repositories_url
 
         expect(response).to be_not_found
       end
