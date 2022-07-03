@@ -15,18 +15,23 @@ class RepositoriesController < ApplicationController
   def show; end
 
   def create
-    Repository.languages.keys.sample(5).each do |language|
-      RepositoriesJob.perform_later language
+    respond_to do |format|
+      format.json do
+        @languages = Repository::LANGUAGES.sample(5)
+        @languages.each do |language|
+          RepositoriesJob.perform_later language
+        end
+      end
     end
   end
 
   private
 
-  def filter_params
-    params.permit :sort, :order, :offset, :limit, :language, :name
-  end
-
   def set_repository
     @repository = Repository.find params[:id]
+  end
+
+  def filter_params
+    params.permit :sort, :order, :offset, :limit, :language, :name
   end
 end

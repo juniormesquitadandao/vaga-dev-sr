@@ -16,8 +16,10 @@ class RepositoriesService
 
     if response.status == 200
       successful response.body
+      true
     else
       unsuccessful response.body
+      false
     end
   end
 
@@ -52,15 +54,12 @@ class RepositoriesService
       name: result['name'],
       full_name: result['full_name'],
       description: result['description'],
-      external_id: result['id'],
+      external_id: result['id'].to_s,
       metadata: result
     )
-
-    true
   end
 
   def unsuccessful(body)
     errors.add :base, body
-    false
   end
 end

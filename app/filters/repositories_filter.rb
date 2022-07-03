@@ -18,7 +18,9 @@ class RepositoriesFilter
       where_string! :language
 
       @count = @results.count
-      @results = @results.select(:id, :language, :name, :external_id, :created_at, :updated_at).offset(offset).limit(limit)
+      @results = @results.select(:id, :language, :name, :external_id, :created_at, :updated_at).offset(offset).limit(limit).to_a
+
+      true
     end
   end
 

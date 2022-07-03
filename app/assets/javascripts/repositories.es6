@@ -58,9 +58,8 @@ class RepositoriesController {
 
   create(path) {
     this.repository.create(path).then((success) => {
-      setTimeout(()=>{
-        this.index(path);
-      }, 1000);
+      alert(JSON.stringify(success.data));
+      this.index(path);
     }, (fail) => {
       this.repository.errors = fail.data.errors;
     });

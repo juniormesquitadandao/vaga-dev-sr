@@ -52,3 +52,7 @@ Layout/LineLength:
 
 Lint/EmptyFile:
   Enabled: false
+
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
