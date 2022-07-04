@@ -17,9 +17,9 @@
   - Price Per Hour: $0.016
 - ECS
   - Type: EC2
-  - Instance: t4g.small
+  - Instance: t3a.small
   - Free Tier? No
-  - Price Per Hour: $0,0168
+  - Price Per Hour: $0,0188
 
 ## Setup
 
