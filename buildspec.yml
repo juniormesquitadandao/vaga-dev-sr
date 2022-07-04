@@ -9,7 +9,6 @@ phases:
       - mv /usr/local/bin/aws /usr/local/bin/aws2
       - aws --version
       - aws2 --version
-      - aws2 s3 ls
   pre_build:
     on-failure: ABORT
     commands:
