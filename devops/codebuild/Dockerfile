@@ -15,15 +15,15 @@ ENV NODE_ENV=production
 RUN bundle install && \
   npm install
 
+ARG ARG_RAILS_MASTER_KEY
 ARG ARG_AWS_ACCESS_KEY_ID
 ARG ARG_AWS_SECRET_ACCESS_KEY
-RUN rails assets:precompile && \
+RUN RAILS_MASTER_KEY=ARG_RAILS_MASTER_KEY rails assets:precompile && \
   AWS_ACCESS_KEY_ID=$ARG_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$ARG_AWS_SECRET_ACCESS_KEY aws s3 sync public s3://juniormesquitadandao/vaga-dev-sr/public && \
   rails assets:clobber && \
   rm -rf node_modules
 
 ARG ARG_DATABASE_URL
-ARG ARG_RAILS_MASTER_KEY
 RUN DATABASE_URL=$ARG_DATABASE_URL RAILS_MASTER_KEY=ARG_RAILS_MASTER_KEY rails db:create db:migrate
 
 CMD ["rails s -d"]
