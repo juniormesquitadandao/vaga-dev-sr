@@ -82,3 +82,7 @@ gem 'redis', '4.7.0'
 gem 'responders', '3.0.1'
 gem 'sidekiq', '6.5.1'
 gem 'slim-rails', '3.5.1'
+
+gem 'sentry-ruby', '5.3.1'
+
+gem 'sentry-rails', '5.3.1'

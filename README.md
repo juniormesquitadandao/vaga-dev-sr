@@ -17,9 +17,9 @@
   - Price Per Hour: $0.016
 - ECS
   - Type: EC2
-  - Instance: t4g.nano
+  - Instance: t4g.small
   - Free Tier? No
-  - Price Per Hour: $0,0042
+  - Price Per Hour: $0,0168
 
 ## Setup
 
