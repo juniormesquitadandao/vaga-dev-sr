@@ -25,5 +25,3 @@ RUN RAILS_MASTER_KEY=$ARG_RAILS_MASTER_KEY rails assets:precompile && \
 
 ARG ARG_DATABASE_URL
 RUN DATABASE_URL=$ARG_DATABASE_URL RAILS_MASTER_KEY=$ARG_RAILS_MASTER_KEY rails db:create db:migrate
-
-CMD ["rails s -d"]

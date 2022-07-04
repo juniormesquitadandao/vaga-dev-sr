@@ -15,6 +15,11 @@
   - Instance: cash.t4g.micro
   - Free Tier? No
   - Price Per Hour: $0.016
+- ECS
+  - Type: EC2
+  - Instance: t4g.nano
+  - Free Tier? No
+  - Price Per Hour: $0,0042
 
 ## Setup
 
