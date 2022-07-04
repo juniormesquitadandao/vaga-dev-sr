@@ -1,5 +1,5 @@
 ARG ARG_RUBY_VERSION
-FROM public.ecr.aws/docker/library/ruby:${ARG_RUBY_VERSION}-slim-buster
+FROM ruby:${ARG_RUBY_VERSION}-slim-buster
 
 SHELL ["/bin/sh", "-c"]
 
