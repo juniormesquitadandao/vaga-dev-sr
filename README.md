@@ -4,6 +4,8 @@
 
 ## AWS Resoucers
 
+http://ec2-3-236-44-147.compute-1.amazonaws.com
+
 - RDS
   - DB: Postgresql
   - Version: 14.2-R1
@@ -42,7 +44,6 @@ cd github
     rubocop -a
     bundle-audit
     circleci config validate
-
 
     date > .keep
     git status
